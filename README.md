@@ -77,14 +77,23 @@ In order to be able to log in to your `matrix` homeserver using credentials stor
 # How to get the server working
 
 using ubuntu (22.04):
+
 install go, docker, git: ```sudo apt install golang-go docker docker-compose git```
+
 tested with go 1.18
+
 get the repository: ```git clone ...```
-initialize the go module: ```go mod init nia-medtech.com/mxisd```
+
+initialize the go module: ```go mod init nia-medtech.com/mxisd-kc```
+
 clean-up/get dependencies: ```go mod tidy```
+
 build: ```go build -o output/backend .```
-build docker image: ```docker build -t mxisd .```
+
+build docker image: ```docker build -t mxisd-kc .```
+
 edit docker-compose.yml and set up the environment variables enumerated earlier
+
 start docker image: ```docker-compose up -d```
 
 NOTE: the app uses port 8091.
