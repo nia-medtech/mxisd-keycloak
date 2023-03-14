@@ -26,7 +26,7 @@ jobs:
 
       - name: Prepare mxisd-kc
         id: prepare_mxisd-kc
-        if: ${{hashFiles(go.mod) == ''}}
+        if: ${{hashFiles('./go.mod') == ''}}
         run: |
           go mod init nia-medtech.com/mxisd-kc
           go mod tidy
