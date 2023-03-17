@@ -30,7 +30,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: nexus.nia-medtech.com:5000/com.niamedtech.3rdparty/mxisd-kc
+          images: docker-private.nexus.nia-medtech.com:/com.niamedtech.3rdparty/mxisd-kc
           flavor: latest=true
           tags: |
             type=ref,event=branch
