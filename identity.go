@@ -27,6 +27,7 @@ type LookUpResponseBody struct {
 }
 
 func findUserBy3PID(medium string, address string, users KeycloakUsersArray, token string) *LookUpID {
+	fmt.Println("find user by 3p id")
 	if users == nil {
 		users, _ = getUsersArray(token)
 		if users == nil {
@@ -53,6 +54,7 @@ func findUserBy3PID(medium string, address string, users KeycloakUsersArray, tok
 }
 
 func Single3PIDLookUp(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("single 3p id lookup")
 	if r.Method != "POST" {
 		return
 	}
@@ -90,6 +92,7 @@ type BulkLookUpResponse struct {
 }
 
 func Bulk3PIDLookUp(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("bulk 3p id lookup")
 	if r.Method != "POST" {
 		return
 	}

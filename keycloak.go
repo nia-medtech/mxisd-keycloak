@@ -22,6 +22,7 @@ type KeycloakSingleUserJson struct {
 }
 
 func decodeKeycloakUsersArray(body io.ReadCloser) (KeycloakUsersArray, error) {
+	fmt.Println("decode keycloak users array")
 	decoder := json.NewDecoder(body)
 	var kc KeycloakUsersArray
 	if decoder.Decode(&kc) != nil {
@@ -34,10 +35,12 @@ func decodeKeycloakUsersArray(body io.ReadCloser) (KeycloakUsersArray, error) {
 }
 
 func getKeycloakToken() (string, error) {
+	fmt.Println("get kc token")
 	return loginKeycloak(userhelper, passhelper)
 }
 
 func loginKeycloak(username string, password string) (string, error) {
+	fmt.Println("login keycloak")
 	token, err := config.PasswordCredentialsToken(context.Background(), username, password)
 	if err != nil {
 		fmt.Println(err)
@@ -48,6 +51,7 @@ func loginKeycloak(username string, password string) (string, error) {
 }
 
 func getRequest(url string, accessToken string) (io.ReadCloser, error) {
+	fmt.Println("get request")
 	client := &http.Client{}
 	request, _ := http.NewRequest("GET", url, nil)
 	request.Header.Set("Authorization", "Bearer "+accessToken)
@@ -59,6 +63,7 @@ func getRequest(url string, accessToken string) (io.ReadCloser, error) {
 }
 
 func getUserArray(token string, username string) (KeycloakSingleUserJson, error) {
+	fmt.Println("get user array")
 	url := usersEndpoint + "?username=" + username
 	body, err := getRequest(url, token)
 	if err != nil {
@@ -76,6 +81,7 @@ func getUserArray(token string, username string) (KeycloakSingleUserJson, error)
 }
 
 func getUsersArray(token string) (KeycloakUsersArray, error) {
+	fmt.Println("get users array")
 	body, err := getRequest(usersEndpoint, token)
 	if err != nil {
 		return nil, err
@@ -85,10 +91,12 @@ func getUsersArray(token string) (KeycloakUsersArray, error) {
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println(len(arr), " users returned.")
 	return arr, nil
 }
 
 func prepareResponse(w http.ResponseWriter, body interface{}) {
+	fmt.Println("prepare response")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(body)

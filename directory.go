@@ -38,6 +38,7 @@ func existsBy3PID(user KeycloakSingleUserJson, term string) bool {
 }
 
 func Directory(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("directory")
 	if r.Method != "POST" {
 		return
 	}
@@ -73,7 +74,10 @@ func Directory(w http.ResponseWriter, r *http.Request) {
 					}
 				}
 				if results != nil {
+					fmt.Println("Found", len(results), "results for ", req.SearchTerm)
 					res.Results = results
+				} else {
+					fmt.Println("No results found for ", req.SearchTerm)
 				}
 			}
 		}

@@ -26,6 +26,7 @@ type AuthResponseBody struct {
 }
 
 func Authentication(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("authentication")
 	if r.Method != "POST" {
 		return
 	}
